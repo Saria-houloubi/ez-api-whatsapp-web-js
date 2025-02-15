@@ -99,7 +99,15 @@ WHATSAPP_CLIENT_STORE_AWS_S3_STORE_PATH=/
 ### **1️⃣ Build and Run with Docker**
 ```sh
 docker build -t whatsapp-bot .
-docker run -p 5000:5000 --env-file .env whatsapp-bot
+docker run -d --name whatsapp-bot -p 5000:5000 \
+  -e PORT=5000 \
+  -e JWT_AUTH_CLIENTS='[{"clientId":"client_id1","clientSecret":"client_secret1","expiresIn":"1h"}]' \
+  -e WHATSAPP_CLIENT_STORE_AWS_S3_REGION=eu-west-1 \
+  -e WHATSAPP_CLIENT_STORE_AWS_S3_BUCKET=my-bucket \
+  -e WHATSAPP_CLIENT_STORE_AWS_S3_KEY=my-key \
+  -e WHATSAPP_CLIENT_STORE_AWS_S3_SECRET_ACCESS_KEY=my-secret \
+  -e WHATSAPP_CLIENT_STORE_AWS_S3_STORE_PATH=/ \
+  whatsapp-bot
 ```
 
 ### **2️⃣ Running Locally (Without Docker)**
@@ -107,6 +115,11 @@ docker run -p 5000:5000 --env-file .env whatsapp-bot
 npm install
 npm run build
 npm start
+```
+
+### **3️⃣ Running with Docker Compose**
+```sh
+docker-compose up -d
 ```
 
 ---
@@ -142,4 +155,3 @@ This project is licensed under the **MIT License**.
 ---
 
 ✅ **Now your app is ready to go!** 🚀 Let me know if you need any improvements! 🔥
-
