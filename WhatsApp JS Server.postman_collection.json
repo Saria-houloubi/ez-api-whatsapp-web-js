@@ -1,0 +1,190 @@
+{
+	"info": {
+		"_postman_id": "e3fb50b9-9582-42a8-8aac-1a596ee3c28d",
+		"name": "WhatsApp JS Server",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2020926"
+	},
+	"item": [
+		{
+			"name": "Authentication - Get Access Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let responseBody = pm.response.json();\r",
+							"pm.collectionVariables.set(\"auth-token\", responseBody.token);\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"clientId\": \"{{clientId}}\",\r\n    \"clientSecret\":\"{{clientSecret}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/get-token",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"get-token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "WhatsApp - Get Client QR Code",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var template = `\r",
+							"<img src=\"{{response.qrCode}}\" alt=\"QR Code\">\r",
+							"`;\r",
+							"\r",
+							"function constructVisualizerPayload() {\r",
+							"    return {response: pm.response.json()}\r",
+							"}\r",
+							"\r",
+							"pm.visualizer.set(template, constructVisualizerPayload());"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/wp/qr",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"wp",
+						"qr"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "WhatsApp - Get Client QR Code",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var template = `\r",
+							"<img src=\"{{response.qrCode}}\" alt=\"QR Code\">\r",
+							"`;\r",
+							"\r",
+							"function constructVisualizerPayload() {\r",
+							"    return {response: pm.response.json()}\r",
+							"}\r",
+							"\r",
+							"pm.visualizer.set(template, constructVisualizerPayload());"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"phone\":\"971543144664\",\r\n  \"message\":\"Hi from postman\"  \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/wp/send",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"wp",
+						"send"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{auth-token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "http://localhost:5000",
+			"type": "string"
+		},
+		{
+			"key": "auth-token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRJZCI6ImNsaWVudF9pZDEiLCJpYXQiOjE3Mzk0NDQ0NzMsImV4cCI6MTczOTQ0ODA3M30.0UfSuC3xiS54jcYs5wUL3ZoqniwkVWCx949ObTz-rc4",
+			"type": "string"
+		},
+		{
+			"key": "clientId",
+			"value": "client_id1",
+			"type": "string"
+		},
+		{
+			"key": "clientSecret",
+			"value": "client_secret1",
+			"type": "string"
+		}
+	]
+}
