@@ -1,0 +1,6 @@
+{
+  "watch": [""],
+  "ext": "js,ts",
+  "ignore": ["dest/*", "src/**/*.test.js"],
+  "exec": "tsc && node dest/index.js"
+}
