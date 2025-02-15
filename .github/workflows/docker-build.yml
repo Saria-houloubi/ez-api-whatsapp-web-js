@@ -29,6 +29,6 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
-          file: ./Dockerfile
+          file: ./src/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/ez-api-whatsapp-web-js:latest
