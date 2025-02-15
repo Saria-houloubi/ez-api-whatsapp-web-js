@@ -1,9 +1,9 @@
 version: '3.8'
 
 services:
-  whatsapp-bot:
-    image: your-dockerhub-username/whatsapp-bot:latest
-    container_name: whatsapp-bot
+  ez-api-whatsapp-web-js:
+    image: sariahouloubi/ez-api-whatsapp-web-js:latest
+    container_name: ez-api-whatsapp-web-js
     restart: always
     ports:
       - "5000:5000"
@@ -16,7 +16,7 @@ services:
       - WHATSAPP_CLIENT_STORE_AWS_S3_SECRET_ACCESS_KEY=my-secret
       - WHATSAPP_CLIENT_STORE_AWS_S3_STORE_PATH=/
     volumes:
-      - whatsapp-data:/app/data
+      - ez-api-whatsapp-web-js-data:/app/data
 
 volumes:
-  whatsapp-data:
+  ez-api-whatsapp-web-js-data:
