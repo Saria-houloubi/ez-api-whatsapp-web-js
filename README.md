@@ -3,6 +3,13 @@
 This is a **Node.js API** that wraps [`whatsapp-web.js`](https://github.com/pedroslopez/whatsapp-web.js) inside a **Docker container**.  
 It provides **three endpoints** for authentication, generating QR codes, and sending messages.
 
+Docker Url
+---
+You can pull image from docker hub
+
+[`Docker Hub`](https://hub.docker.com/repository/docker/sariahouloubi/ez-api-whatsapp-web-js)
+
+
 ---
 
 ## **📌 Features**
@@ -135,7 +142,7 @@ docker-compose up -d
 1. Fork this repository.
 2. Clone the repo:  
    ```sh
-   git clone https://github.com/yourusername/whatsapp-bot.git
+   git clone https://github.com/Saria-houloubi/ez-api-whatsapp-web-js.git
    ```
 3. Install dependencies:  
    ```sh
