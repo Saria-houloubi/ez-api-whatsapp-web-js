@@ -1,13 +1,15 @@
 import { Client, RemoteAuth } from "whatsapp-web.js";
 import { getAwsStore } from "./awss3.client";
+import { increaseFailWPClientConnection } from "./metric-client";
 
 const clients: { [key: string]: WhatsAppClient } = {};
 
 export class WhatsAppClient {
   private client: Client;
   private connectQrCode: string = "";
-
+  private clientId: string;
   constructor(clientId: string) {
+    this.clientId = clientId;
     this.client = new Client({
       authStrategy: new RemoteAuth({
         store: getAwsStore(),
@@ -79,6 +81,7 @@ export class WhatsAppClient {
         return;
       }
     }
+    increaseFailWPClientConnection(this.clientId);
     throw new Error("Whatsapp client is no able to be connected!");
   }
 }

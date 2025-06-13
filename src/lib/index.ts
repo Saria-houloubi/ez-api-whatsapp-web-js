@@ -13,12 +13,16 @@ import {
   getJwtAuthClients,
   getPort as getRunningPort,
 } from "./providers/env-variable.provider";
+import { initializePromClient } from "./clients/metric-client";
 
 const express = require("express");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
 
 const app = express();
+
+initializePromClient(app);
+
 app.use(express.json());
 
 const PORT = getRunningPort();
