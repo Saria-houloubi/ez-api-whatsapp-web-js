@@ -39,7 +39,7 @@ export const sendWhatsAppMessageAsync = async (
 
   var client = getWhatsAppClient(clientId);
 
-  var response = await client.sendMessage(wpRequest.phone, wpRequest.message);
+  var response = await client.sendMessage(wpRequest);
 
   return res.status(200).json({ messageId: response });
 };

@@ -25,10 +25,13 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
+      - name: Set Datestamp
+        run: echo "DATE_TAG=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v4
         with:
           context: ./src
           file: ./src/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/ez-api-whatsapp-web-js:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/ez-api-whatsapp-web-js:${{ env.DATE_TAG }}

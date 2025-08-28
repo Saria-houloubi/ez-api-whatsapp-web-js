@@ -1,6 +1,7 @@
 import { Client, RemoteAuth } from "whatsapp-web.js";
 import { getAwsStore } from "./awss3.client";
 import { increaseFailWPClientConnection } from "./metric-client";
+import { WhatsAppSendRequest } from "../models/requests/whatsapp-send.requests.model";
 
 const clients: { [key: string]: WhatsAppClient } = {};
 
@@ -44,14 +45,17 @@ export class WhatsAppClient {
    * @param message message to send
    * @returns
    */
-  async sendMessage(phone: string, message: string): Promise<string> {
+  async sendMessage(request: WhatsAppSendRequest): Promise<string> {
     await this.isConnectedAsync();
 
-    const wpPhoneNumber = await this.client.getNumberId(phone);
+    const wpPhoneNumber = await this.client.getNumberId(request.phone);
 
     var response = await this.client.sendMessage(
       `${wpPhoneNumber?.user}@${wpPhoneNumber?.server}`,
-      message
+      request.message,
+      {
+        linkPreview: request.linkPreview,
+      }
     );
     return response.id.id;
   }
